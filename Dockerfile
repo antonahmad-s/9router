@@ -28,7 +28,7 @@ ENV DATA_DIR=/app/data
 
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/standalone ./.next/standalone
 COPY --from=builder /app/open-sse ./open-sse
 # Next file tracing can omit sibling files; MITM runs server.js as a separate process.
 COPY --from=builder /app/src/mitm ./src/mitm
@@ -45,4 +45,4 @@ RUN apk --no-cache upgrade
 EXPOSE 20128
 
 USER node
-CMD ["node", "server.js"]
+CMD ["node", ".next/standalone/server.js"]
